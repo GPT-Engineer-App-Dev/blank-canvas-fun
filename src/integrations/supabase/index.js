@@ -69,18 +69,34 @@ export const useAddEvent = () => {
     });
 };
 
-// Comment hooks
-export const useComments = (eventId) => useQuery({
-    queryKey: ['comments', eventId],
-    queryFn: () => fromSupabase(supabase.from('comments').select('*').eq('event_id', eventId)),
-});
-
 export const useAddComment = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (newComment) => fromSupabase(supabase.from('comments').insert([newComment])),
         onSuccess: () => {
             queryClient.invalidateQueries('comments');
+        },
+    });
+};
+
+// Event update hook
+export const useUpdateEvent = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (updatedEvent) => fromSupabase(supabase.from('events').update(updatedEvent).eq('id', updatedEvent.id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries('events');
+        },
+    });
+};
+
+// Event delete hook
+export const useDeleteEvent = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => fromSupabase(supabase.from('events').delete().eq('id', id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries('events');
         },
     });
 };
