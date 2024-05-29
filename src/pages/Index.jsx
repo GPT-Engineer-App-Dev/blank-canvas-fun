@@ -12,6 +12,7 @@ const Index = () => {
           <Link p={2} href="#" color="white">Home</Link>
           <Link p={2} href="#" color="white">About</Link>
           <Link p={2} href="#" color="white">Contact</Link>
+          <Link p={2} href="/events" color="white">Events</Link>
         </Box>
       </Flex>
       <Container centerContent maxW="container.md" height="80vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
